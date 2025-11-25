@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagos - Recepcionista</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      color: #008B8B;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px 30px;
+    }
+
+    h2 {
+      color: #008B8B;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .btn-nuevo {
+      background-color: #20B2AA;
+      color: white;
+      margin-bottom: 15px;
+      transition: background 0.3s;
+    }
+
+    .btn-nuevo:hover {
+      background-color: #008B8B;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #20B2AA;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .btn-eliminar {
+      background-color: #e53935;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Recepcionista - Pagos</h1>
+    <nav>
+      <a href="login.html" style="text-decoration:none;color:white;">
+        <button class="btn btn-eliminar">Cerrar sesión</button>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Pagos Registrados</h2>
+    <button class="btn btn-nuevo">Registrar Nuevo Pago</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Paciente</th>
+          <th>Servicio</th>
+          <th>Monto</th>
+          <th>Fecha</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Juan Pérez</td>
+          <td>Limpieza Dental</td>
+          <td>Bs. 200</td>
+          <td>09/11/2025</td>
+          <td><button class="btn-eliminar">Eliminar</button></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>María López</td>
+          <td>Ortodoncia</td>
+          <td>Bs. 800</td>
+          <td>09/11/2025</td>
+          <td><button class="btn-eliminar">Eliminar</button></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Carlos Martínez</td>
+          <td>Endodoncia</td>
+          <td>Bs. 450</td>
+          <td>09/11/2025</td>
+          <td><button class="btn-eliminar">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

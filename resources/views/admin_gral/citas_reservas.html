@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citas y Reservas - Administrador</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      color: #008B8B;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px 30px;
+    }
+
+    h2 {
+      color: #008B8B;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #20B2AA;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-agregar {
+      background-color: #43a047;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .btn-editar {
+      background-color: #fbc02d;
+      color: white;
+    }
+
+    .btn-eliminar {
+      background-color: #e53935;
+      color: white;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 20px 30px;
+      border-radius: 6px;
+      width: 400px;
+      max-width: 90%;
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: #008B8B;
+    }
+
+    .modal-content label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .modal-content input, .modal-content select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-content .modal-buttons {
+      margin-top: 15px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Administrador - Citas y Reservas</h1>
+    <nav>
+      <button class="btn btn-eliminar" onclick="alert('Cerrar sesión simulado')">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Citas Programadas</h2>
+    <button class="btn btn-agregar" onclick="abrirModal()">Agregar Cita</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Paciente</th>
+          <th>Odontólogo</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-citas">
+        <tr>
+          <td>1</td>
+          <td>Juan Pérez</td>
+          <td>Dr. Luis Gómez</td>
+          <td>2025-11-12</td>
+          <td>09:00</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarCita(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarCita(this)">Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>María López</td>
+          <td>Dra. Ana Ruiz</td>
+          <td>2025-11-12</td>
+          <td>11:00</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarCita(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarCita(this)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modalCita">
+    <div class="modal-content">
+      <h3>Agregar Cita</h3>
+      <label>Paciente:</label>
+      <input type="text" id="paciente">
+      <label>Odontólogo:</label>
+      <input type="text" id="odontologo">
+      <label>Fecha:</label>
+      <input type="date" id="fecha">
+      <label>Hora:</label>
+      <input type="time" id="hora">
+      <div class="modal-buttons">
+        <button class="btn btn-agregar" onclick="guardarCita()">Guardar</button>
+        <button class="btn btn-eliminar" onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modalCita');
+
+    function abrirModal() {
+      modal.style.display = 'flex';
+      document.querySelector('.modal-content h3').innerText = 'Agregar Cita';
+      document.getElementById('paciente').value = '';
+      document.getElementById('odontologo').value = '';
+      document.getElementById('fecha').value = '';
+      document.getElementById('hora').value = '';
+    }
+
+    function cerrarModal() {
+      modal.style.display = 'none';
+    }
+
+    function guardarCita() {
+      const paciente = document.getElementById('paciente').value;
+      const odontologo = document.getElementById('odontologo').value;
+      const fecha = document.getElementById('fecha').value;
+      const hora = document.getElementById('hora').value;
+
+      if(paciente && odontologo && fecha && hora) {
+        const tabla = document.getElementById('tabla-citas');
+        const nuevaFila = tabla.insertRow();
+        nuevaFila.innerHTML = `
+          <td>${tabla.rows.length}</td>
+          <td>${paciente}</td>
+          <td>${odontologo}</td>
+          <td>${fecha}</td>
+          <td>${hora}</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarCita(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarCita(this)">Eliminar</button>
+          </td>
+        `;
+        cerrarModal();
+      } else {
+        alert('Por favor, complete todos los campos.');
+      }
+    }
+
+    function eliminarCita(btn) {
+      if(confirm('¿Desea eliminar esta cita?')) {
+        const fila = btn.parentElement.parentElement;
+        fila.remove();
+      }
+    }
+
+    function editarCita(btn) {
+      const fila = btn.parentElement.parentElement;
+      const celdas = fila.getElementsByTagName('td');
+
+      abrirModal();
+      document.querySelector('.modal-content h3').innerText = 'Editar Cita';
+      document.getElementById('paciente').value = celdas[1].innerText;
+      document.getElementById('odontologo').value = celdas[2].innerText;
+      document.getElementById('fecha').value = celdas[3].innerText;
+      document.getElementById('hora').value = celdas[4].innerText;
+
+      const guardarBtn = document.querySelector('.modal-content .btn-agregar');
+      guardarBtn.onclick = function() {
+        celdas[1].innerText = document.getElementById('paciente').value;
+        celdas[2].innerText = document.getElementById('odontologo').value;
+        celdas[3].innerText = document.getElementById('fecha').value;
+        celdas[4].innerText = document.getElementById('hora').value;
+        cerrarModal();
+        guardarBtn.onclick = guardarCita;
+      }
+    }
+
+    window.onclick = function(event) {
+      if(event.target == modal) cerrarModal();
+    }
+  </script>
+</body>
+</html>

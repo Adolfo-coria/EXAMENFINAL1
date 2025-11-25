@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tratamientos - Perfil Odontólogo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f4f8;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #20B2AA;
+      margin-bottom: 30px;
+    }
+
+    .odontograma-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 950px;
+      margin: auto;
+      margin-bottom: 30px;
+    }
+
+    /* Odontograma */
+    .tooth {
+      width: 50px;
+      height: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 6px;
+      border: 2px solid transparent;
+    }
+
+    .tooth img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .tooth span {
+      font-size: 12px;
+      color: #1E90FF;
+    }
+
+    .tooth:hover {
+      transform: translateY(-3px);
+    }
+
+    .tooth.selected {
+      border: 2px solid #20B2AA;
+      background-color: #20B2AA;
+    }
+
+    .tooth.selected span {
+      color: #fff;
+    }
+
+    .row-odontograma {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .upper-row, .lower-row {
+      margin-bottom: 20px;
+    }
+
+    .spacer {
+      width: 60px;
+    }
+
+    /* Formulario de tratamiento */
+    .treatment-form {
+      background-color: #20B2AA;
+      padding: 20px;
+      border-radius: 12px;
+      color: #fff;
+      max-width: 950px;
+      margin: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .treatment-form label {
+      font-weight: 600;
+    }
+
+    .treatment-form input,
+    .treatment-form select,
+    .treatment-form textarea {
+      border-radius: 8px;
+      border: none;
+      padding: 8px;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+
+    .treatment-form input:focus,
+    .treatment-form select:focus,
+    .treatment-form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 10px #008B8B;
+    }
+
+    .treatment-form button {
+      background-color: #fff;
+      color: #20B2AA;
+      font-weight: bold;
+      border-radius: 8px;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .treatment-form button:hover {
+      background-color: #008B8B;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>Tratamientos</h1>
+
+<!-- Odontograma -->
+<div class="odontograma-container">
+  <h5>Odontograma</h5>
+  <div class="upper-row row-odontograma">
+    <!-- Superior derecho 1-8 -->
+    <div class="row-odontograma">
+      <div class="tooth" data-tooth="1"><img src="img/dientes/incisivo.png" alt="1"><span>1</span></div>
+      <div class="tooth" data-tooth="2"><img src="img/dientes/incisivo.png" alt="2"><span>2</span></div>
+      <div class="tooth" data-tooth="3"><img src="img/dientes/canino.png" alt="3"><span>3</span></div>
+      <div class="tooth" data-tooth="4"><img src="img/dientes/premolar.png" alt="4"><span>4</span></div>
+      <div class="tooth" data-tooth="5"><img src="img/dientes/premolar.png" alt="5"><span>5</span></div>
+      <div class="tooth" data-tooth="6"><img src="img/dientes/molar.png" alt="6"><span>6</span></div>
+      <div class="tooth" data-tooth="7"><img src="img/dientes/molar.png" alt="7"><span>7</span></div>
+      <div class="tooth" data-tooth="8"><img src="img/dientes/molar.png" alt="8"><span>8</span></div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- Superior izquierdo 9-16 -->
+    <div class="row-odontograma">
+      <div class="tooth" data-tooth="9"><img src="img/dientes/molar.png" alt="9"><span>9</span></div>
+      <div class="tooth" data-tooth="10"><img src="img/dientes/molar.png" alt="10"><span>10</span></div>
+      <div class="tooth" data-tooth="11"><img src="img/dientes/premolar.png" alt="11"><span>11</span></div>
+      <div class="tooth" data-tooth="12"><img src="img/dientes/premolar.png" alt="12"><span>12</span></div>
+      <div class="tooth" data-tooth="13"><img src="img/dientes/canino.png" alt="13"><span>13</span></div>
+      <div class="tooth" data-tooth="14"><img src="img/dientes/incisivo.png" alt="14"><span>14</span></div>
+      <div class="tooth" data-tooth="15"><img src="img/dientes/incisivo.png" alt="15"><span>15</span></div>
+      <div class="tooth" data-tooth="16"><img src="img/dientes/incisivo.png" alt="16"><span>16</span></div>
+    </div>
+  </div>
+
+  <div class="lower-row row-odontograma">
+    <!-- Inferior izquierdo 17-24 -->
+    <div class="row-odontograma">
+      <div class="tooth" data-tooth="17"><img src="img/dientes/incisivo_inf.png" alt="17"><span>17</span></div>
+      <div class="tooth" data-tooth="18"><img src="img/dientes/incisivo_inf.png" alt="18"><span>18</span></div>
+      <div class="tooth" data-tooth="19"><img src="img/dientes/canino_inf.png" alt="19"><span>19</span></div>
+      <div class="tooth" data-tooth="20"><img src="img/dientes/premolar_inf.png" alt="20"><span>20</span></div>
+      <div class="tooth" data-tooth="21"><img src="img/dientes/premolar_inf.png" alt="21"><span>21</span></div>
+      <div class="tooth" data-tooth="22"><img src="img/dientes/molar_inf.png" alt="22"><span>22</span></div>
+      <div class="tooth" data-tooth="23"><img src="img/dientes/molar_inf.png" alt="23"><span>23</span></div>
+      <div class="tooth" data-tooth="24"><img src="img/dientes/molar_inf.png" alt="24"><span>24</span></div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- Inferior derecho 25-32 -->
+    <div class="row-odontograma">
+      <div class="tooth" data-tooth="25"><img src="img/dientes/molar_inf.png" alt="25"><span>25</span></div>
+      <div class="tooth" data-tooth="26"><img src="img/dientes/molar_inf.png" alt="26"><span>26</span></div>
+      <div class="tooth" data-tooth="27"><img src="img/dientes/premolar_inf.png" alt="27"><span>27</span></div>
+      <div class="tooth" data-tooth="28"><img src="img/dientes/premolar_inf.png" alt="28"><span>28</span></div>
+      <div class="tooth" data-tooth="29"><img src="img/dientes/canino_inf.png" alt="29"><span>29</span></div>
+      <div class="tooth" data-tooth="30"><img src="img/dientes/incisivo_inf.png" alt="30"><span>30</span></div>
+      <div class="tooth" data-tooth="31"><img src="img/dientes/incisivo_inf.png" alt="31"><span>31</span></div>
+      <div class="tooth" data-tooth="32"><img src="img/dientes/incisivo_inf.png" alt="32"><span>32</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Formulario de tratamiento -->
+<div class="treatment-form">
+  <h5>Datos del Tratamiento</h5>
+  <form>
+    <div class="row">
+      <div class="col-md-4">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha">
+      </div>
+      <div class="col-md-4">
+        <label for="doctor">Doctor:</label>
+        <input type="text" id="doctor" name="doctor" placeholder="Nombre del doctor">
+      </div>
+      <div class="col-md-4">
+        <label for="tipo">Tipo de Tratamiento:</label>
+        <input type="text" id="tipo" name="tipo" placeholder="Ej: Restauración">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <label for="piezas">Número de Piezas:</label>
+        <input type="number" id="piezas" name="piezas" min="1">
+      </div>
+      <div class="col-md-3">
+        <label for="relleno">Material de Relleno:</label>
+        <input type="text" id="relleno" name="relleno" placeholder="Ej: Amalgama">
+      </div>
+      <div class="col-md-3">
+        <label for="sellado">Material de Sellado:</label>
+        <input type="text" id="sellado" name="sellado" placeholder="Ej: Ionómero">
+      </div>
+      <div class="col-md-3">
+        <label for="pago">Forma de Pago:</label>
+        <select id="pago" name="pago">
+          <option value="efectivo">Efectivo</option>
+          <option value="tarjeta">Tarjeta</option>
+          <option value="transferencia">Transferencia</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" rows="3" placeholder="Detalles del tratamiento"></textarea>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit">Guardar Tratamiento</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.querySelectorAll('.tooth').forEach(tooth => {
+    tooth.addEventListener('click', () => {
+      tooth.classList.toggle('selected');
+    });
+  });
+</script>
+
+</body>
+</html>

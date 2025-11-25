@@ -1,0 +1,203 @@
+body {
+  background-color:#ffffff; /* Cambia este color por el que prefieras */
+  color:#1E90FF; /* Cambia el color del texto si es necesario */
+}
+
+/* Carousel */
+.carousel-item {
+  height: 90vh;
+  background-color: #000;
+  position: relative;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  height: 100%;
+  filter: brightness(60%);
+}
+
+.carousel-caption {
+  bottom: 20%;
+}
+
+/* Sección Servicios */
+#servicios .text-primary-mb-4{
+  color: #20B2AA;
+  padding-bottom: 50px;
+}
+
+#servicios .col-md-4 {
+  padding: 20px;
+  border-radius: 15px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background-color:#20B2AA;
+  color: #ffffff;
+}
+
+#servicios .col-md-4:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #008080;
+  background-color: #008B8B;
+  cursor: pointer;
+}
+
+#servicios .col-md-4 i {
+  transition: transform 0.3s ease;
+}
+
+#servicios .col-md-4:hover i {
+  transform: scale(1.2);
+}
+
+/* Sección Equipo */
+#equipo .text-primary-mb-4{
+  color: #20B2AA;
+  padding-bottom: 50px;
+}
+
+#equipo .col-md-4 {
+  padding: 20px;
+  border-radius: 15px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background-color: #20B2AA;
+  color: #ffffff;
+}
+
+#equipo .col-md-4:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #008080;
+  background-color: #ffffff;
+  color:#20B2AA;
+  cursor: pointer;
+}
+
+#equipo img {
+  transition: transform 0.3s ease;
+}
+
+#equipo .col-md-4:hover img {
+  transform: scale(1.1);
+}
+
+/* Cajas contacto */
+.contacto-box {
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+#contacto .container .text-center-text-primary-mb-5 {
+  position: relative;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+#contacto .container{
+  color: #20B2AA;
+}
+
+/* Enlaces sin subrayado */
+.contacto-box a {
+  text-decoration: none;
+  color: #20B2AA;
+  transition: color 0.3s ease;
+}
+
+.contacto-box a:hover {
+  color: #008080;
+}
+
+/* Redes sociales efecto hover */
+.contacto-box .fs-4 a:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+}
+
+.redes-sociales i, h5 i.bi-share-fill {
+  color: #20B2AA;
+}
+
+/* Navbar */
+.bg-light-shadow-sm-py-3{
+  padding: 20px;
+}
+
+.bg-light-shadow-sm-py-3 .text-primary-fw-bold {
+  color: #f8f8f8;
+}
+
+.nav-link-text-dark{
+  display: flex;
+  justify-content: baseline;
+  color: #20B2AA;
+  padding: 8px 15px;
+  text-decoration: none;
+}
+
+/* Hover con fondo cuadrado */
+.nav-link-text-dark:hover {
+  background-color: #20B2AA;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+
+/* Botón "Reservar Cita" */
+.btn-outline-success {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+/* Botón sin borde y con cuadro estilizado */
+.btn-reservar {
+  display: flex;
+  justify-content: baseline; 
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background-color:#20B2AA;
+  color: #ffffff;
+}
+
+.btn-reservar:hover {
+  box-shadow: 0 0 25px #008080;
+  background-color: #008B8B;
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+/* Footer */
+.footer-custom {
+  background-color: #20B2AA;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Botón flotante estilo dental */
+.btn-flotante {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #20B2AA;
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 50%;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-flotante:hover {
+  background-color: #008B8B;
+  transform: scale(1.2);
+}

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reportes Generales | Panel Super Admin</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <style>
+    /* === Estilos base === */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      margin: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #20B2AA;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.6em;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
+
+    /* === Tarjetas === */
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      color: #008B8B;
+      margin-bottom: 15px;
+      border-left: 5px solid #20B2AA;
+      padding-left: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 550px;
+      margin: auto;
+      display: block;
+    }
+
+    .resumen {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .resumen .dato {
+      background: #20B2AA;
+      color: white;
+      border-radius: 10px;
+      padding: 15px 25px;
+      flex: 1 1 200px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .dato h3 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    .dato p {
+      margin: 5px 0 0;
+      font-size: 0.95em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      color: #555;
+      font-size: 0.9em;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    📊 Reportes Generales del Sistema
+  </header>
+
+  <div class="container">
+
+    <div class="card">
+      <h2>Resumen General</h2>
+      <div class="resumen">
+        <div class="dato">
+          <h3>124</h3>
+          <p>Usuarios Activos</p>
+        </div>
+        <div class="dato">
+          <h3>350</h3>
+          <p>Citas Registradas</p>
+        </div>
+        <div class="dato">
+          <h3>89%</h3>
+          <p>Satisfacción del Cliente</p>
+        </div>
+        <div class="dato">
+          <h3>12</h3>
+          <p>Reportes Mensuales</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Actividad del Sistema</h2>
+      <div class="grid">
+        <canvas id="graficoBarras"></canvas>
+        <canvas id="graficoCircular"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Detalle de Operaciones</h2>
+      <table style="width:100%; border-collapse:collapse;">
+        <thead>
+          <tr style="background-color:#20B2AA; color:white;">
+            <th style="padding:10px; text-align:left;">Fecha</th>
+            <th style="padding:10px; text-align:left;">Módulo</th>
+            <th style="padding:10px; text-align:left;">Operación</th>
+            <th style="padding:10px; text-align:left;">Usuario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px;">08/11/2025</td>
+            <td style="padding:10px;">Usuarios</td>
+            <td style="padding:10px;">Alta de nuevo usuario</td>
+            <td style="padding:10px;">SuperAdmin</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px;">07/11/2025</td>
+            <td style="padding:10px;">Configuración</td>
+            <td style="padding:10px;">Cambio de parámetros del sistema</td>
+            <td style="padding:10px;">Admin General</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px;">05/11/2025</td>
+            <td style="padding:10px;">Reportes</td>
+            <td style="padding:10px;">Exportación de datos</td>
+            <td style="padding:10px;">Auditor</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2025 Clínica Dental Sonrisa Feliz — Panel Super Admin
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // === Gráfico de Barras ===
+    const ctxBarras = document.getElementById('graficoBarras');
+    new Chart(ctxBarras, {
+      type: 'bar',
+      data: {
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago'],
+        datasets: [{
+          label: 'Citas Mensuales',
+          data: [45, 60, 75, 90, 110, 95, 130, 120],
+          backgroundColor: 'rgba(32,178,170,0.7)',
+          borderRadius: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Evolución de Citas por Mes',
+            font: { size: 18, weight: 'bold' },
+            color: '#008B8B'
+          },
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // === Gráfico Circular ===
+    const ctxCircular = document.getElementById('graficoCircular');
+    new Chart(ctxCircular, {
+      type: 'doughnut',
+      data: {
+        labels: ['Usuarios', 'Pacientes', 'Citas', 'Reportes'],
+        datasets: [{
+          data: [30, 40, 20, 10],
+          backgroundColor: [
+            'rgba(32,178,170,0.8)',
+            'rgba(0,139,139,0.8)',
+            'rgba(72,209,204,0.8)',
+            'rgba(175,238,238,0.8)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#333' } },
+          title: {
+            display: true,
+            text: 'Distribución de Módulos Activos',
+            color: '#008B8B',
+            font: { size: 18, weight: 'bold' }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

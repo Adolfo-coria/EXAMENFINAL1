@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagos y Facturación - Administrador</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      color: #008B8B;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px 30px;
+    }
+
+    h2 {
+      color: #008B8B;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #20B2AA;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-agregar {
+      background-color: #43a047;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .btn-editar {
+      background-color: #fbc02d;
+      color: white;
+    }
+
+    .btn-eliminar {
+      background-color: #e53935;
+      color: white;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 20px 30px;
+      border-radius: 6px;
+      width: 400px;
+      max-width: 90%;
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: #008B8B;
+    }
+
+    .modal-content label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-content .modal-buttons {
+      margin-top: 15px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Administrador - Pagos y Facturación</h1>
+    <nav>
+      <button class="btn btn-eliminar" onclick="alert('Cerrar sesión simulado')">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Registro de Pagos</h2>
+    <button class="btn btn-agregar" onclick="abrirModal()">Agregar Pago</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Paciente</th>
+          <th>Servicio</th>
+          <th>Monto</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-pagos">
+        <tr>
+          <td>1</td>
+          <td>Juan Pérez</td>
+          <td>Limpieza Dental</td>
+          <td>Bs. 200</td>
+          <td>2025-11-08</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarPago(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarPago(this)">Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>María López</td>
+          <td>Ortodoncia</td>
+          <td>Bs. 1500</td>
+          <td>2025-11-09</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarPago(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarPago(this)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modalPago">
+    <div class="modal-content">
+      <h3>Agregar Pago</h3>
+      <label>Paciente:</label>
+      <input type="text" id="paciente">
+      <label>Servicio:</label>
+      <input type="text" id="servicio">
+      <label>Monto:</label>
+      <input type="number" id="monto">
+      <label>Fecha:</label>
+      <input type="date" id="fecha">
+      <div class="modal-buttons">
+        <button class="btn btn-agregar" onclick="guardarPago()">Guardar</button>
+        <button class="btn btn-eliminar" onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modalPago');
+
+    function abrirModal() {
+      modal.style.display = 'flex';
+      document.querySelector('.modal-content h3').innerText = 'Agregar Pago';
+      document.getElementById('paciente').value = '';
+      document.getElementById('servicio').value = '';
+      document.getElementById('monto').value = '';
+      document.getElementById('fecha').value = '';
+    }
+
+    function cerrarModal() {
+      modal.style.display = 'none';
+    }
+
+    function guardarPago() {
+      const paciente = document.getElementById('paciente').value;
+      const servicio = document.getElementById('servicio').value;
+      const monto = document.getElementById('monto').value;
+      const fecha = document.getElementById('fecha').value;
+
+      if(paciente && servicio && monto && fecha) {
+        const tabla = document.getElementById('tabla-pagos');
+        const nuevaFila = tabla.insertRow();
+        nuevaFila.innerHTML = `
+          <td>${tabla.rows.length}</td>
+          <td>${paciente}</td>
+          <td>${servicio}</td>
+          <td>Bs. ${monto}</td>
+          <td>${fecha}</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarPago(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarPago(this)">Eliminar</button>
+          </td>
+        `;
+        cerrarModal();
+      } else {
+        alert('Por favor, complete todos los campos.');
+      }
+    }
+
+    function eliminarPago(btn) {
+      if(confirm('¿Desea eliminar este pago?')) {
+        const fila = btn.parentElement.parentElement;
+        fila.remove();
+      }
+    }
+
+    function editarPago(btn) {
+      const fila = btn.parentElement.parentElement;
+      const celdas = fila.getElementsByTagName('td');
+
+      abrirModal();
+      document.querySelector('.modal-content h3').innerText = 'Editar Pago';
+      document.getElementById('paciente').value = celdas[1].innerText;
+      document.getElementById('servicio').value = celdas[2].innerText;
+      document.getElementById('monto').value = celdas[3].innerText.replace('Bs. ','');
+      document.getElementById('fecha').value = celdas[4].innerText;
+
+      const guardarBtn = document.querySelector('.modal-content .btn-agregar');
+      guardarBtn.onclick = function() {
+        celdas[1].innerText = document.getElementById('paciente').value;
+        celdas[2].innerText = document.getElementById('servicio').value;
+        celdas[3].innerText = 'Bs. ' + document.getElementById('monto').value;
+        celdas[4].innerText = document.getElementById('fecha').value;
+        cerrarModal();
+        guardarBtn.onclick = guardarPago;
+      }
+    }
+
+    window.onclick = function(event) {
+      if(event.target == modal) cerrarModal();
+    }
+  </script>
+</body>
+</html>

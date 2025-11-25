@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Super Admin | Clínica Dental Sonrisa Feliz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <style>
+    /* --- Estilos base --- */
+    body {
+      margin: 0;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #eef3f9;
+      overflow: hidden;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      width: 270px;
+      background: linear-gradient(180deg, #008b8b, #20b2aa);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 25px 0;
+      box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h2 {
+      font-size: 1.4em;
+      margin-bottom: 30px;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar nav {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar nav a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .sidebar nav a i {
+      margin-right: 10px;
+      font-size: 1.2em;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background: rgba(255, 255, 255, 0.15);
+      border-left: 5px solid #fff;
+      padding-left: 20px;
+    }
+
+    /* --- Contenido principal --- */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    /* --- Header --- */
+    .header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 15px 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header h1 {
+      color: #008b8b;
+      font-size: 1.4em;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .user-info i {
+      font-size: 1.6em;
+      color: #008b8b;
+    }
+
+    /* --- Dashboard --- */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      padding: 35px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      padding: 25px 15px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .card i {
+      font-size: 40px;
+      color: #20b2aa;
+      margin-bottom: 12px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover i {
+      transform: scale(1.2);
+    }
+
+    .card h3 {
+      color: #008b8b;
+      margin: 5px 0;
+      font-size: 1.1em;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 0.9em;
+    }
+
+    /* --- Scrollbar personalizada --- */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #20b2aa;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #008b8b;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>Super Admin</h2>
+    <nav>
+      <a href="superadmin.html" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a href="usuarios.html"><i class="bi bi-people"></i> Gestión de Usuarios</a>
+      <a href="accesos.html"><i class="bi bi-shield-lock"></i> Control de Accesos</a>
+      <a href="configuracion.html"><i class="bi bi-gear"></i> Configuración del Sistema</a>
+      <a href="copias.html"><i class="bi bi-database"></i> Copias de Seguridad</a>
+      <a href="reportes.html"><i class="bi bi-bar-chart"></i> Reportes Generales</a>
+      <a href="#"><i class="bi bi-envelope"></i> Mensajes / Soporte</a>
+      <a href="#"><i class="bi bi-bell"></i> Notificaciones</a>
+      <a href="#"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <h1>Panel de Control - Super Admin</h1>
+      <div class="user-info">
+        <i class="bi bi-person-circle"></i>
+        <span>Bienvenido, Admin</span>
+      </div>
+    </header>
+
+    <section class="dashboard">
+      <div class="card"><i class="bi bi-people"></i><h3>Usuarios Totales</h3><p>125</p></div>
+      <div class="card"><i class="bi bi-person-check"></i><h3>Usuarios Activos</h3><p>98</p></div>
+      <div class="card"><i class="bi bi-building-gear"></i><h3>Configuraciones</h3><p>6 módulos activos</p></div>
+      <div class="card"><i class="bi bi-database-check"></i><h3>Copias de Seguridad</h3><p>Última: 02/11/2025</p></div>
+      <div class="card"><i class="bi bi-bar-chart-line"></i><h3>Actividad del Sistema</h3><p>98% estable</p></div>
+      <div class="card"><i class="bi bi-bug"></i><h3>Errores Reportados</h3><p>0 en las últimas 24h</p></div>
+    </section>
+  </main>
+</body>
+</html>

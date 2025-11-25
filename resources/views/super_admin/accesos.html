@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Accesos</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #008B8B, #008B8B);
+      color: white;
+      padding: 18px;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      width: 90%;
+      margin: 40px auto;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 25px;
+      margin-bottom: 30px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #008B8B;
+      font-weight: 600;
+      border-left: 4px solid #008B8B;
+      padding-left: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background: #fff;
+    }
+
+    th, td {
+      border-bottom: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #008B8B;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .status {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 500;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .activo {
+      background-color: #d4edda;
+      color: #008B8B;
+    }
+
+    .inactivo {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    .grafico {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    canvas {
+      width: 100%;
+      height: 350px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <i class="fas fa-lock"></i> Control de Accesos
+  </header>
+
+  <div class="container">
+
+    <div class="card">
+      <h2>Historial de Accesos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Fecha de Acceso</th>
+            <th>IP</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Admin</td>
+            <td>2025-11-09 10:24</td>
+            <td>192.168.0.15</td>
+            <td><span class="status activo">Éxito</span></td>
+          </tr>
+          <tr>
+            <td>Enfermera1</td>
+            <td>2025-11-09 08:10</td>
+            <td>192.168.0.18</td>
+            <td><span class="status activo">Éxito</span></td>
+          </tr>
+          <tr>
+            <td>UsuarioX</td>
+            <td>2025-11-08 22:05</td>
+            <td>190.186.22.35</td>
+            <td><span class="status inactivo">Fallido</span></td>
+          </tr>
+          <tr>
+            <td>Soporte</td>
+            <td>2025-11-08 19:44</td>
+            <td>192.168.0.12</td>
+            <td><span class="status activo">Éxito</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Estadísticas de Acceso</h2>
+      <div class="grafico">
+        <canvas id="graficoAccesos"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('graficoAccesos').getContext('2d');
+    const grafico = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+        datasets: [{
+          label: 'Intentos de Acceso',
+          data: [25, 30, 22, 35, 40, 15, 10],
+          backgroundColor: 'rgba(67, 160, 71, 0.7)',
+          borderColor: '#2e7d32',
+          borderWidth: 2,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { color: '#333' }
+          },
+          title: {
+            display: true,
+            text: 'Intentos de Acceso por Día',
+            color: '#2e7d32',
+            font: { size: 18, weight: 'bold' }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#333' }
+          },
+          x: {
+            ticks: { color: '#333' }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recetas - Paciente</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      color: #008B8B;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px 30px;
+    }
+
+    h2 {
+      color: #008B8B;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #20B2AA;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .btn-ver {
+      background-color: #20B2AA;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    .btn-ver:hover {
+      background-color: #008B8B;
+    }
+
+    .btn-cerrar {
+      background-color: #e53935;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Paciente - Recetas</h1>
+    <nav>
+      <a href="login.html" style="text-decoration:none;color:white;">
+        <button class="btn-cerrar">Cerrar sesión</button>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mis Recetas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Receta</th>
+          <th>Fecha</th>
+          <th>Odontólogo</th>
+          <th>Medicamentos / Indicaciones</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>201</td>
+          <td>15/11/2025</td>
+          <td>Dr. Juan Ramírez</td>
+          <td>Ibuprofeno 400mg - 3 veces al día por 5 días</td>
+          <td><button class="btn btn-ver">Ver Detalle</button></td>
+        </tr>
+        <tr>
+          <td>202</td>
+          <td>20/11/2025</td>
+          <td>Dra. María López</td>
+          <td>Enjuague bucal - 2 veces al día por 7 días</td>
+          <td><button class="btn btn-ver">Ver Detalle</button></td>
+        </tr>
+        <tr>
+          <td>203</td>
+          <td>25/11/2025</td>
+          <td>Dr. Carlos Martínez</td>
+          <td>Amoxicilina 500mg - 3 veces al día por 7 días</td>
+          <td><button class="btn btn-ver">Ver Detalle</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

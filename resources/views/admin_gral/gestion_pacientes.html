@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Pacientes - Administrador</title>
+  <style>
+    /* ===== ESTILO GENERAL ===== */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #20B2AA;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    header nav button {
+      background-color: #008B8B;
+      border: none;
+      color: white;
+      padding: 8px 15px;
+      margin-left: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    header nav button:hover {
+      background-color: #006d6d;
+      transform: scale(1.05);
+    }
+
+    main {
+      padding: 30px;
+    }
+
+    h2 {
+      color: #20B2AA;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* ===== TABLA ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+      font-size: 15px;
+    }
+
+    th {
+      background-color: #008B8B;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    /* ===== BOTONES ===== */
+    .btn {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-agregar {
+      background-color: #20B2AA;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .btn-agregar:hover {
+      background-color: #008B8B;
+    }
+
+    .btn-editar {
+      background-color: #fbc02d;
+      color: white;
+    }
+
+    .btn-eliminar {
+      background-color: #e53935;
+      color: white;
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      width: 420px;
+      max-width: 90%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: #20B2AA;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .modal-content label {
+      display: block;
+      margin-top: 12px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s;
+    }
+
+    .modal-content input:focus {
+      border-color: #20B2AA;
+      outline: none;
+    }
+
+    .modal-buttons {
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.95);}
+      to {opacity: 1; transform: scale(1);}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Administrador - Gestión de Pacientes</h1>
+    <nav>
+      <button onclick="alert('Cerrar sesión (simulado)')">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Pacientes Registrados</h2>
+    <button class="btn btn-agregar" onclick="abrirModal()">+ Agregar Paciente</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-pacientes">
+        <tr>
+          <td>1</td>
+          <td>Juan Pérez</td>
+          <td>30</td>
+          <td>+591 70000001</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarPaciente(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarPaciente(this)">Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>María López</td>
+          <td>25</td>
+          <td>+591 70000002</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarPaciente(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarPaciente(this)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal" id="modalPaciente">
+    <div class="modal-content">
+      <h3>Agregar Paciente</h3>
+      <label>Nombre:</label>
+      <input type="text" id="nombre">
+      <label>Edad:</label>
+      <input type="number" id="edad">
+      <label>Teléfono:</label>
+      <input type="text" id="telefono">
+      <div class="modal-buttons">
+        <button class="btn btn-agregar" onclick="guardarPaciente()">Guardar</button>
+        <button class="btn btn-eliminar" onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modalPaciente');
+
+    function abrirModal() {
+      modal.style.display = 'flex';
+      document.querySelector('.modal-content h3').innerText = 'Agregar Paciente';
+      document.getElementById('nombre').value = '';
+      document.getElementById('edad').value = '';
+      document.getElementById('telefono').value = '';
+    }
+
+    function cerrarModal() {
+      modal.style.display = 'none';
+    }
+
+    function guardarPaciente() {
+      const nombre = document.getElementById('nombre').value;
+      const edad = document.getElementById('edad').value;
+      const telefono = document.getElementById('telefono').value;
+
+      if (nombre && edad && telefono) {
+        const tabla = document.getElementById('tabla-pacientes');
+        const nuevaFila = tabla.insertRow();
+        nuevaFila.innerHTML = `
+          <td>${tabla.rows.length}</td>
+          <td>${nombre}</td>
+          <td>${edad}</td>
+          <td>${telefono}</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarPaciente(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarPaciente(this)">Eliminar</button>
+          </td>
+        `;
+        cerrarModal();
+      } else {
+        alert('Por favor, complete todos los campos.');
+      }
+    }
+
+    function eliminarPaciente(btn) {
+      if (confirm('¿Desea eliminar este paciente?')) {
+        btn.closest('tr').remove();
+      }
+    }
+
+    function editarPaciente(btn) {
+      const fila = btn.closest('tr');
+      const celdas = fila.getElementsByTagName('td');
+
+      abrirModal();
+      document.querySelector('.modal-content h3').innerText = 'Editar Paciente';
+      document.getElementById('nombre').value = celdas[1].innerText;
+      document.getElementById('edad').value = celdas[2].innerText;
+      document.getElementById('telefono').value = celdas[3].innerText;
+
+      const guardarBtn = document.querySelector('.modal-content .btn-agregar');
+      guardarBtn.onclick = function() {
+        celdas[1].innerText = document.getElementById('nombre').value;
+        celdas[2].innerText = document.getElementById('edad').value;
+        celdas[3].innerText = document.getElementById('telefono').value;
+        cerrarModal();
+        guardarBtn.onclick = guardarPaciente;
+      }
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) cerrarModal();
+    }
+  </script>
+</body>
+</html>

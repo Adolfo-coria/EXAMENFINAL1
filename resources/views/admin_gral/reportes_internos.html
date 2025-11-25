@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reportes Internos - Administrador</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      color: #008B8B;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px 30px;
+    }
+
+    h2 {
+      color: #008B8B;
+      margin-bottom: 15px;
+    }
+
+    .chart-container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #20B2AA;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Administrador - Reportes Internos</h1>
+    <nav>
+      <button style="background-color:#e53935;color:white;padding:6px 12px;border:none;border-radius:4px;cursor:pointer;" onclick="alert('Cerrar sesión simulado')">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Resumen de Pacientes</h2>
+    <div class="chart-container">
+      <canvas id="chartPacientes"></canvas>
+    </div>
+
+    <h2>Resumen de Citas</h2>
+    <div class="chart-container">
+      <canvas id="chartCitas"></canvas>
+    </div>
+
+    <h2>Historial de Pagos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Paciente</th>
+          <th>Servicio</th>
+          <th>Monto</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Juan Pérez</td>
+          <td>Limpieza Dental</td>
+          <td>Bs. 200</td>
+          <td>2025-11-08</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>María López</td>
+          <td>Ortodoncia</td>
+          <td>Bs. 1500</td>
+          <td>2025-11-09</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Carlos Martínez</td>
+          <td>Endodoncia</td>
+          <td>Bs. 800</td>
+          <td>2025-11-10</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    // Gráfico de barras - Pacientes por mes
+    const ctxPacientes = document.getElementById('chartPacientes');
+    new Chart(ctxPacientes, {
+      type: 'bar',
+      data: {
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Pacientes nuevos',
+          data: [20, 25, 18, 30, 22, 28],
+          backgroundColor: '#20B2AA'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    // Gráfico de líneas - Citas por semana
+    const ctxCitas = document.getElementById('chartCitas');
+    new Chart(ctxCitas, {
+      type: 'line',
+      data: {
+        labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+        datasets: [{
+          label: 'Citas agendadas',
+          data: [12, 18, 15, 20],
+          borderColor: '#008B8B',
+          backgroundColor: 'rgba(0,139,139,0.2)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>

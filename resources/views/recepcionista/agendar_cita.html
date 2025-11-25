@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendar Cita - Recepcionista</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      color: #008B8B;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px 30px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      color: #008B8B;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    form {
+      background-color: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: 500;
+      color: #333;
+    }
+
+    input, select {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    .btn-agendar {
+      background-color: #20B2AA;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    .btn-agendar:hover {
+      background-color: #008B8B;
+    }
+
+    .btn-cancelar {
+      background-color: #e53935;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    .btn-cancelar:hover {
+      background-color: #b71c1c;
+    }
+
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Recepcionista - Agendar Cita</h1>
+    <nav>
+      <a href="login.html" style="text-decoration:none;color:white;">
+        <button class="btn btn-cancelar">Cerrar sesión</button>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Formulario de Agendamiento</h2>
+    <form>
+      <div>
+        <label for="paciente">Paciente:</label>
+        <select id="paciente" required>
+          <option value="">Seleccione paciente</option>
+          <option value="juan">Juan Pérez</option>
+          <option value="maria">María López</option>
+          <option value="carlos">Carlos Martínez</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="odontologo">Odontólogo:</label>
+        <select id="odontologo" required>
+          <option value="">Seleccione odontólogo</option>
+          <option value="dr_luis">Dr. Luis Gómez</option>
+          <option value="dra_ana">Dra. Ana Ruiz</option>
+          <option value="dr_pedro">Dr. Pedro Soto</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="fecha">Fecha de la cita:</label>
+        <input type="date" id="fecha" required>
+      </div>
+
+      <div>
+        <label for="hora">Hora de la cita:</label>
+        <input type="time" id="hora" required>
+      </div>
+
+      <div>
+        <label for="servicio">Servicio:</label>
+        <select id="servicio" required>
+          <option value="">Seleccione servicio</option>
+          <option value="limpieza">Limpieza Dental</option>
+          <option value="ortodoncia">Ortodoncia</option>
+          <option value="endodoncia">Endodoncia</option>
+        </select>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" class="btn btn-agendar">Agendar</button>
+        <button type="reset" class="btn btn-cancelar">Cancelar</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

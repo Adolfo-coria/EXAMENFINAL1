@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Odontólogos - Administrador</title>
+  <style>
+    /* --- Fuentes y colores según referencia --- */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      color: #008B8B;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px 30px;
+    }
+
+    h2 {
+      color: #008B8B;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #20B2AA;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-agregar {
+      background-color: #43a047;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .btn-editar {
+      background-color: #fbc02d;
+      color: white;
+    }
+
+    .btn-eliminar {
+      background-color: #e53935;
+      color: white;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 20px 30px;
+      border-radius: 6px;
+      width: 400px;
+      max-width: 90%;
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: #008B8B;
+    }
+
+    .modal-content label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-content .modal-buttons {
+      margin-top: 15px;
+      text-align: right;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Administrador - Gestión de Odontólogos</h1>
+    <nav>
+      <button class="btn btn-eliminar" onclick="alert('Cerrar sesión simulado')">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Odontólogos</h2>
+    <button class="btn btn-agregar" onclick="abrirModal()">Agregar Odontólogo</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Especialidad</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-odontologos">
+        <tr>
+          <td>1</td>
+          <td>Dr. Luis Gómez</td>
+          <td>Ortodoncia</td>
+          <td>+591 70000003</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarOdontologo(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarOdontologo(this)">Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Dra. Ana Ruiz</td>
+          <td>Endodoncia</td>
+          <td>+591 70000004</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarOdontologo(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarOdontologo(this)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modalOdontologo">
+    <div class="modal-content">
+      <h3>Agregar Odontólogo</h3>
+      <label>Nombre:</label>
+      <input type="text" id="nombre">
+      <label>Especialidad:</label>
+      <input type="text" id="especialidad">
+      <label>Teléfono:</label>
+      <input type="text" id="telefono">
+      <div class="modal-buttons">
+        <button class="btn btn-agregar" onclick="guardarOdontologo()">Guardar</button>
+        <button class="btn btn-eliminar" onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modalOdontologo');
+
+    function abrirModal() {
+      modal.style.display = 'flex';
+      document.querySelector('.modal-content h3').innerText = 'Agregar Odontólogo';
+      document.getElementById('nombre').value = '';
+      document.getElementById('especialidad').value = '';
+      document.getElementById('telefono').value = '';
+    }
+
+    function cerrarModal() {
+      modal.style.display = 'none';
+    }
+
+    function guardarOdontologo() {
+      const nombre = document.getElementById('nombre').value;
+      const especialidad = document.getElementById('especialidad').value;
+      const telefono = document.getElementById('telefono').value;
+
+      if(nombre && especialidad && telefono) {
+        const tabla = document.getElementById('tabla-odontologos');
+        const nuevaFila = tabla.insertRow();
+        nuevaFila.innerHTML = `
+          <td>${tabla.rows.length}</td>
+          <td>${nombre}</td>
+          <td>${especialidad}</td>
+          <td>${telefono}</td>
+          <td>
+            <button class="btn btn-editar" onclick="editarOdontologo(this)">Editar</button>
+            <button class="btn btn-eliminar" onclick="eliminarOdontologo(this)">Eliminar</button>
+          </td>
+        `;
+        cerrarModal();
+      } else {
+        alert('Por favor, complete todos los campos.');
+      }
+    }
+
+    function eliminarOdontologo(btn) {
+      if(confirm('¿Desea eliminar este odontólogo?')) {
+        const fila = btn.parentElement.parentElement;
+        fila.remove();
+      }
+    }
+
+    function editarOdontologo(btn) {
+      const fila = btn.parentElement.parentElement;
+      const celdas = fila.getElementsByTagName('td');
+
+      abrirModal();
+      document.querySelector('.modal-content h3').innerText = 'Editar Odontólogo';
+      document.getElementById('nombre').value = celdas[1].innerText;
+      document.getElementById('especialidad').value = celdas[2].innerText;
+      document.getElementById('telefono').value = celdas[3].innerText;
+
+      const guardarBtn = document.querySelector('.modal-content .btn-agregar');
+      guardarBtn.onclick = function() {
+        celdas[1].innerText = document.getElementById('nombre').value;
+        celdas[2].innerText = document.getElementById('especialidad').value;
+        celdas[3].innerText = document.getElementById('telefono').value;
+        cerrarModal();
+        guardarBtn.onclick = guardarOdontologo;
+      }
+    }
+
+    window.onclick = function(event) {
+      if(event.target == modal) cerrarModal();
+    }
+  </script>
+</body>
+</html>

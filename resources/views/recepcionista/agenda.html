@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda del Día - Recepcionista</title>
+
+  <!-- FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    header {
+      background-color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      color: #008B8B;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px 30px;
+    }
+
+    h2 {
+      color: #008B8B;
+      margin-bottom: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #20B2AA;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-agregar {
+      background-color: #43a047;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .btn-editar {
+      background-color: #fbc02d;
+      color: white;
+    }
+
+    .btn-eliminar {
+      background-color: #e53935;
+      color: white;
+    }
+
+    /* Contenedor del calendario */
+    #calendar {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Recepcionista - Agenda del Día</h1>
+    <nav>
+      <a href="login.html" style="text-decoration:none;color:white;">
+        <button class="btn btn-eliminar">Cerrar sesión</button>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Calendario de Citas</h2>
+    <div id="calendar"></div>
+
+    <h2>Lista de Citas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Paciente</th>
+          <th>Odontólogo</th>
+          <th>Hora</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Juan Pérez</td>
+          <td>Dr. Luis Gómez</td>
+          <td>09:00</td>
+          <td>Pendiente</td>
+          <td>
+            <button class="btn btn-editar">Editar</button>
+            <button class="btn btn-eliminar">Cancelar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>María López</td>
+          <td>Dra. Ana Ruiz</td>
+          <td>11:00</td>
+          <td>Confirmada</td>
+          <td>
+            <button class="btn btn-editar">Editar</button>
+            <button class="btn btn-eliminar">Cancelar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Carlos Martínez</td>
+          <td>Dr. Pedro Soto</td>
+          <td>14:00</td>
+          <td>Pendiente</td>
+          <td>
+            <button class="btn btn-editar">Editar</button>
+            <button class="btn btn-eliminar">Cancelar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <!-- FullCalendar JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script>
+    const calendarEl = document.getElementById('calendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale: 'es',
+      height: 500,
+      events: [
+        { title: 'Juan Pérez - Limpieza', start: '2025-11-09T09:00:00', color: '#20B2AA' },
+        { title: 'María López - Ortodoncia', start: '2025-11-09T11:00:00', color: '#008B8B' },
+        { title: 'Carlos Martínez - Endodoncia', start: '2025-11-09T14:00:00', color: '#20B2AA' }
+      ],
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      }
+    });
+    calendar.render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso - Sonrisa Feliz</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="stilo.css" rel="stylesheet">
+  <style>
+    .container { max-width:600px; margin:40px auto; font-family: Arial, sans-serif }
+    a { color: #007bff }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Acceso al sistema</h1>
+    <p>Hemos actualizado el sistema de autenticación. Puedes iniciar sesión o registrarte desde las siguientes rutas:</p>
+    <ul>
+      <li><a href="/login">Iniciar sesión</a> (usa Nombre completo, CI o Celular + contraseña)</li>
+      <li><a href="/register">Registrar nueva cuenta</a> (Paciente / Odontólogo / Administrador)</li>
+    </ul>
+    <p>Si necesitas que migre enlaces antiguos a estas rutas, dímelo y lo hago.</p>
+  </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Pacientes - Clínica Dental</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="stilo.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+
+<style>
+  .custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%2320B2AA' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+
+
+    /* Fondo general con imagen y overlay */
+.fondo-registro {
+  background: linear-gradient(rgba(32, 178, 170, 0.4), rgba(32, 178, 170, 0.4)),
+              url('img/mark_dentista.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Caja de formulario estilo glassmorphism */
+.formulario-transparente {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Inputs semitransparentes */
+.input-transparente {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color:#008B8B;
+  border-radius: 10px;
+}
+
+.input-transparente::placeholder {
+  color: #008B8B;
+}
+
+.input-transparente:focus {
+  background: rgba(255, 255, 255, 0.25);
+  color:#008B8B;
+  outline: none;
+  box-shadow: 0 0 5px #20B2AA;
+}
+
+/* Botón blanco con texto verde */
+.boton-blanco {
+  background-color: white;
+  color: #20B2AA;
+  font-weight: bold;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.boton-blanco:hover {
+  background-color: #008B8B;
+  transform: scale(1.05);
+}
+
+</style>
+
+ <section class="fondo-registro py-5">
+    <div class="container d-flex justify-content-center align-items-center">
+      <div class="formulario-transparente p-4 rounded-4 shadow mx-auto">
+        <h2 class="text-center mb-4 text-white">Registro de Paciente</h2>
+        <form id="formRegistro" method="post" action="procesar_registro.php">
+          <div class="mb-3">
+            <label for="nombre" class="form-label text-white">Nombre</label>
+            <input type="text" class="form-control input-transparente" id="nombre" name="nombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="apellido" class="form-label text-white">Apellido</label>
+            <input type="text" class="form-control input-transparente" id="apellido" name="apellido" required>
+          </div>
+          <div class="mb-3">
+            <label for="ci" class="form-label text-white">C.I.</label>
+            <input type="text" class="form-control input-transparente" id="ci" name="ci" required>
+          </div>
+          <div class="mb-3">
+            <label for="telefono" class="form-label text-white">Teléfono</label>
+            <input type="text" class="form-control input-transparente" id="telefono" name="telefono">
+          </div>
+          <div class="mb-3">
+            <label for="correo" class="form-label text-white">Correo Electrónico</label>
+            <input type="email" class="form-control input-transparente" id="correo" name="correo">
+          </div>
+          <div class="mb-3">
+            <label for="fecha_nacimiento" class="form-label text-white">Fecha de Nacimiento</label>
+            <input type="date" class="form-control input-transparente" id="fecha_nacimiento" name="fecha_nacimiento">
+          </div>
+          <div class="mb-4">
+            <label for="genero" class="form-label text-white">Género</label>
+            <select class="form-select input-transparente" id="genero" name="genero">
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn boton-blanco">Registrarse</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

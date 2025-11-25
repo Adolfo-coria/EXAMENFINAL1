@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copias de Seguridad | Panel Super Admin</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <style>
+    /* === Estilos base === */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      margin: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #20B2AA;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.6em;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 30px auto;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      color: #008B8B;
+      margin-bottom: 15px;
+      border-left: 5px solid #20B2AA;
+      padding-left: 10px;
+    }
+
+    /* === Botones === */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      background-color: #20B2AA;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 0.95em;
+      transition: 0.3s;
+    }
+    .btn i {
+      margin-right: 8px;
+    }
+    .btn:hover {
+      background-color: #008B8B;
+    }
+
+    /* === Tabla === */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #20B2AA;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* === Modal === */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      animation: aparecer 0.3s ease;
+    }
+
+    @keyframes aparecer {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-content h3 {
+      color: #008B8B;
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .btn-cancelar {
+      background-color: #999;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      color: #555;
+      font-size: 0.9em;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    💾 Copias de Seguridad del Sistema
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Gestión de Copias</h2>
+      <button class="btn" id="btnNueva"><i class="bi bi-cloud-plus"></i> Crear Nueva Copia</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Tamaño</th>
+            <th>Usuario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>08/11/2025 - 14:32</td>
+            <td>125 MB</td>
+            <td>SuperAdmin</td>
+            <td><span style="color:green; font-weight:600;">Completado</span></td>
+            <td>
+              <button class="btn"><i class="bi bi-cloud-arrow-down"></i> Descargar</button>
+              <button class="btn btn-cancelar"><i class="bi bi-trash"></i> Eliminar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>05/11/2025 - 10:18</td>
+            <td>120 MB</td>
+            <td>SuperAdmin</td>
+            <td><span style="color:green; font-weight:600;">Completado</span></td>
+            <td>
+              <button class="btn"><i class="bi bi-cloud-arrow-down"></i> Descargar</button>
+              <button class="btn btn-cancelar"><i class="bi bi-trash"></i> Eliminar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>01/11/2025 - 09:50</td>
+            <td>119 MB</td>
+            <td>Admin General</td>
+            <td><span style="color:orange; font-weight:600;">En espera</span></td>
+            <td>
+              <button class="btn"><i class="bi bi-clock-history"></i> Reintentar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Historial de Copias</h2>
+      <canvas id="graficoCopias"></canvas>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Clínica Dental Sonrisa Feliz — Panel Super Admin
+  </footer>
+
+  <!-- Modal para crear copia -->
+  <div class="modal" id="modalNueva">
+    <div class="modal-content">
+      <h3>Crear Nueva Copia</h3>
+      <p>¿Deseas generar una nueva copia de seguridad del sistema?</p>
+      <button class="btn" id="confirmarCopia"><i class="bi bi-check2-circle"></i> Confirmar</button>
+      <button class="btn btn-cancelar" id="cancelarCopia"><i class="bi bi-x-circle"></i> Cancelar</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // === Modal control ===
+    const modal = document.getElementById('modalNueva');
+    const btnNueva = document.getElementById('btnNueva');
+    const cancelar = document.getElementById('cancelarCopia');
+    const confirmar = document.getElementById('confirmarCopia');
+
+    btnNueva.addEventListener('click', () => modal.style.display = 'flex');
+    cancelar.addEventListener('click', () => modal.style.display = 'none');
+    confirmar.addEventListener('click', () => {
+      alert('✅ Copia creada exitosamente');
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', e => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+
+    // === Gráfico de copias (últimos 6 meses) ===
+    const ctx = document.getElementById('graficoCopias');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'],
+        datasets: [{
+          label: 'Copias creadas',
+          data: [4, 3, 5, 6, 4, 7],
+          borderColor: '#20B2AA',
+          backgroundColor: 'rgba(32,178,170,0.2)',
+          fill: true,
+          tension: 0.3,
+          pointBackgroundColor: '#008B8B',
+          pointBorderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Frecuencia de Copias (últimos 6 meses)',
+            color: '#008B8B',
+            font: { size: 18, weight: 'bold' }
+          }
+        },
+        scales: {
+          y: { beginAtZero: true, ticks: { stepSize: 1 } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
